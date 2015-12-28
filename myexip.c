@@ -11,11 +11,9 @@
 
 #include <stdio.h>
 #include <curl/curl.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include <curl/curl.h>
 
 struct ip { char ip[50]; };
 struct ip myip;
