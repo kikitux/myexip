@@ -18,7 +18,7 @@
 #include <unistd.h>
 #include <string.h>
 
-struct ip { char ip[50]; };
+struct ip { char ip[64]; };
 struct ip myip;
 
 size_t  write_data(void *ptr, size_t size, size_t nmemb, FILE *stream)
