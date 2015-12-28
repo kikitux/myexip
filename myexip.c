@@ -6,7 +6,10 @@
  *
  * usage:
  * ./myexip [-6] [-h]
- *
+ * 
+ * inspired on
+ * http://stackoverflow.com/questions/897027/i-want-to-store-a-result-for-character-string-with-libcurl
+ * http://marc.info/?l=curl-library&m=100204184522546&w=2
  */
 
 #include <stdio.h>
