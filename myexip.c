@@ -41,7 +41,7 @@ int main(int argc, char **argv)
     int c; // getopt counter
 
     opterr = 0;
-    while ((c = getopt (argc, argv, "h6v:")) != -1){
+    while ((c = getopt (argc, argv, "h6")) != -1){
         switch (c)
         {
             case 'h':
