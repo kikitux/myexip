@@ -66,7 +66,7 @@ int main(int argc, char **argv)
     curl_easy_getinfo (curl_handle, CURLINFO_RESPONSE_CODE, &http_code);
 
     if (CURLE_OK == 0 && http_code == 200 ){
-        printf("%s\n",myip.ip);
+        printf("%s",myip.ip);
     } else {
         exit(1);
     }
