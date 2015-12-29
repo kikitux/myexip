@@ -47,8 +47,7 @@ int main(int argc, char **argv){
 
     opterr = 0;
     while ((c = getopt (argc, argv, "h6")) != -1){
-        switch (c)
-        {
+        switch (c){
             case 'h':
                 printf("use: %s [-6]\n", argv[0]); // basic usage
                 exit(0);
@@ -62,15 +61,15 @@ int main(int argc, char **argv){
     } // end while
 
     CURL *curl_handle;
-    curl_handle = curl_easy_init();
 
+    curl_handle = curl_easy_init();
     curl_easy_setopt(curl_handle, CURLOPT_URL, url);
     curl_easy_setopt(curl_handle, CURLOPT_NOPROGRESS, 1);
     curl_easy_setopt(curl_handle, CURLOPT_HEADER, 1);
     curl_easy_setopt(curl_handle, CURLOPT_NOBODY, 1);
     curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, &write_data);
     curl_easy_perform(curl_handle);
-    curl_easy_getinfo (curl_handle, CURLINFO_RESPONSE_CODE, &http_code);
+    curl_easy_getinfo(curl_handle, CURLINFO_RESPONSE_CODE, &http_code);
 
     if (CURLE_OK == 0 && http_code == 200 ){
         printf("%s", myip.ip);
