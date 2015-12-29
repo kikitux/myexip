@@ -19,12 +19,12 @@
 #include <string.h>
 
 struct ip { char ip[64]; };
-struct ip myip;
+struct ip myip; // global variable that will store ip
 
 size_t  write_data(void *ptr, size_t size, size_t nmemb, FILE *stream)
 {
     char buf[size*nmemb+1];
-    char * pbuf = &buf[0];
+    char *pbuf = &buf[0];
     memset(buf, '\0', size*nmemb+1);
     size_t i = 0;
     for(;  i < nmemb ; i++){
@@ -32,13 +32,19 @@ size_t  write_data(void *ptr, size_t size, size_t nmemb, FILE *stream)
         pbuf += size;
         ptr += size;
     }
-    strncpy(myip.ip,buf, sizeof(myip.ip));
+    
+    char *str = "My-External-Ip: "; // the header we are looking for
+    size_t lenstr = strlen(str);
+
+    if (strncmp(buf, str, lenstr) == 0)
+        strncpy(myip.ip,buf+lenstr, sizeof(myip.ip));
+
     return size * nmemb;
 }
 
 int main(int argc, char **argv)
 {
-    char *url = "http://ipv4.myexternalip.com/raw"; // default to ipv4
+    char *url = "http://ipv4.myexternalip.com"; // default to ipv4
     long http_code = 0;
 
     int c; // getopt counter
@@ -51,7 +57,7 @@ int main(int argc, char **argv)
                 printf("use: %s [-6]\n",argv[0]);
                 exit(0);
             case '6':
-                url = "http://ipv6.myexternalip.com/raw";
+                url = "http://ipv6.myexternalip.com";
                 break;
             case '?':
                 printf("unknown arg %c\n", optopt);
@@ -64,6 +70,8 @@ int main(int argc, char **argv)
 
     curl_easy_setopt(curl_handle,   CURLOPT_URL, url);
     curl_easy_setopt(curl_handle,   CURLOPT_NOPROGRESS  ,1);
+    curl_easy_setopt(curl_handle,   CURLOPT_HEADER, 1);
+    curl_easy_setopt(curl_handle,   CURLOPT_NOBODY, 1);
     curl_easy_setopt(curl_handle,   CURLOPT_WRITEFUNCTION,&write_data);
     curl_easy_perform(curl_handle);
     curl_easy_getinfo (curl_handle, CURLINFO_RESPONSE_CODE, &http_code);
