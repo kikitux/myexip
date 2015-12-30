@@ -1,11 +1,17 @@
 # myexip
-C cli to resolve external ipv4 and ipv6 using myexternalip.com
+cli to resolve external ipv4 and ipv6 using myexternalip.com
 
 ## Compile
 
-```bash
-gcc -lcurl -o myexip myexip.c
+```make
+make
 ```
+
+```bash
+cc -o myexip $(pkg-config --cflags libcurl) myexip.c $(pkg-config --libs libcurl)
+```
+
+Working compilers: gcc, clang
 
 ## Usage
 
@@ -13,7 +19,7 @@ gcc -lcurl -o myexip myexip.c
 $ ./myexip -h
 use: ./myexip [-6]
 
-$ ./myexip 
+$ ./myexip
 222.111.66.11
 
 $ ./myexip -6
