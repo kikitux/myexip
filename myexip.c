@@ -3,6 +3,10 @@
  * Alvaro Miranda
  * 20151229
  *
+ * Thanks Mathias for PR
+ * https://github.com/kikitux/myexip/pull/1
+ * https://github.com/mgumz
+ *
  * C cli to query myexternalip.com
  *
  * usage:
